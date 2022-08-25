@@ -23,36 +23,57 @@ import (
 	tjconfig "github.com/crossplane/terrajet/pkg/config"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/crossplane-contrib/provider-jet-template/config/null"
+	"github.com/crossplane-contrib/provider-jet-keyhub/config/clientapplication"
+	"github.com/crossplane-contrib/provider-jet-keyhub/config/group"
+	"github.com/crossplane-contrib/provider-jet-keyhub/config/grouponsystem"
+	"github.com/crossplane-contrib/provider-jet-keyhub/config/vaultrecord"
 )
 
 const (
-	resourcePrefix = "template"
-	modulePath     = "github.com/crossplane-contrib/provider-jet-template"
+	resourcePrefix = "keyhub"
+	modulePath     = "github.com/crossplane-contrib/provider-jet-keyhub"
 )
 
 //go:embed schema.json
 var providerSchema string
 
+var skipList = []string{}
+
+var includeList = []string{
+	".*",
+}
+
 // GetProvider returns provider configuration
 func GetProvider() *tjconfig.Provider {
-	defaultResourceFn := func(name string, terraformResource *schema.Resource, opts ...tjconfig.ResourceOption) *tjconfig.Resource {
-		r := tjconfig.DefaultResource(name, terraformResource)
-		// Add any provider-specific defaulting here. For example:
-		//   r.ExternalName = tjconfig.IdentifierFromProvider
-		return r
-	}
-
 	pc := tjconfig.NewProviderWithSchema([]byte(providerSchema), resourcePrefix, modulePath,
-		tjconfig.WithDefaultResourceFn(defaultResourceFn))
+		tjconfig.WithIncludeList(includeList),
+		tjconfig.WithSkipList(skipList),
+		tjconfig.WithDefaultResourceFn(DefaultResource(
+			GroupKindOverrides(),
+			KindOverrides(),
+			KnownReferencers(),
+		)),
+	)
 
 	for _, configure := range []func(provider *tjconfig.Provider){
 		// add custom config functions
-		null.Configure,
+		clientapplication.Configure,
+		group.Configure,
+		grouponsystem.Configure,
+		vaultrecord.Configure,
 	} {
 		configure(pc)
 	}
 
 	pc.ConfigureResources()
 	return pc
+}
+
+// DefaultResource returns a DefaultResoruceFn that makes sure the original
+// DefaultResource call is made with given options here.
+// nolint
+func DefaultResource(opts ...tjconfig.ResourceOption) tjconfig.DefaultResourceFn {
+	return func(name string, terraformResource *schema.Resource, orgOpts ...tjconfig.ResourceOption) *tjconfig.Resource {
+		return tjconfig.DefaultResource(name, terraformResource, append(orgOpts, opts...)...)
+	}
 }

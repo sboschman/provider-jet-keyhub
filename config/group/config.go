@@ -1,5 +1,3 @@
-//go:build generate
-
 /*
 Copyright 2021 The Crossplane Authors.
 
@@ -16,25 +14,18 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package main
+package group
 
 import (
-	"fmt"
-	"os"
-	"path/filepath"
+	tjconfig "github.com/crossplane/terrajet/pkg/config"
 
-	"github.com/crossplane/terrajet/pkg/pipeline"
-
-	"github.com/crossplane-contrib/provider-jet-keyhub/config"
+	"github.com/crossplane-contrib/provider-jet-keyhub/config/common"
 )
 
-func main() {
-	if len(os.Args) < 2 || os.Args[1] == "" {
-		panic("root directory is required to be given as argument")
-	}
-	absRootDir, err := filepath.Abs(os.Args[1])
-	if err != nil {
-		panic(fmt.Sprintf("cannot calculate the absolute path of %s", os.Args[1]))
-	}
-	pipeline.Run(config.GetProvider(), absRootDir)
+// Configure configures the null group
+func Configure(p *tjconfig.Provider) {
+	p.AddResourceConfigurator("keyhub_group", func(r *tjconfig.Resource) {
+		r.Version = common.VersionV1Alpha2
+		r.ExternalName = tjconfig.IdentifierFromProvider
+	})
 }
