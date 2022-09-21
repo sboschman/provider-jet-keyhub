@@ -7,9 +7,10 @@ PROJECT_REPO := github.com/crossplane-contrib/$(PROJECT_NAME)
 export TERRAFORM_VERSION := 1.1.6
 
 export TERRAFORM_PROVIDER_SOURCE := topicuskeyhub/keyhub
-export TERRAFORM_PROVIDER_VERSION := 1.2.0
+export TERRAFORM_PROVIDER_VERSION := 1.2.1
 export TERRAFORM_PROVIDER_DOWNLOAD_NAME := terraform-provider-keyhub
-export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX := https://releases.hashicorp.com/terraform-provider-keyhub/1.2.0
+export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX := https://github.com/topicuskeyhub/terraform-provider-keyhub/releases/download/v1.2.1
+# https://releases.hashicorp.com/terraform-provider-keyhub/1.2.1
 
 PLATFORMS ?= linux_amd64 linux_arm64
 

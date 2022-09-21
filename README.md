@@ -24,6 +24,12 @@ You can see the API reference [here](https://doc.crds.dev/github.com/crossplane-
 
 ## Developing
 
+Clone this repository and cd into the repository directory. Fetch the upbound/build submodule by running the following:
+
+```console
+make submodules
+```
+
 Run code-generation pipeline:
 ```console
 make generate
