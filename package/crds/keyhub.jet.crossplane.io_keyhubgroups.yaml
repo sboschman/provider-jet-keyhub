@@ -110,7 +110,8 @@ spec:
                     description: Don't show audit trail in KeyHub Dashboard
                     type: boolean
                   member:
-                    description: At least one manager should be defined
+                    description: At least one manager or nested_under_groupuuid should
+                      be defined
                     items:
                       properties:
                         rights:
@@ -130,6 +131,9 @@ spec:
                     type: string
                   name:
                     description: The Name field of the group
+                    type: string
+                  nestedUnderGroupuuid:
+                    description: The UUID of the group to nest the new group under
                     type: string
                   privateGroup:
                     description: Set group to invite only
@@ -151,7 +155,6 @@ spec:
                       (default), `RECOVERY_KEY_ONLY`, `NONE`'
                     type: string
                 required:
-                - member
                 - name
                 type: object
               providerConfigRef:

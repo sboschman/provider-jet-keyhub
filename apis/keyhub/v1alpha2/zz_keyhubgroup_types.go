@@ -78,9 +78,9 @@ type KeyHubGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	HideAuditTrail *bool `json:"hideAuditTrail,omitempty" tf:"hide_audit_trail,omitempty"`
 
-	// At least one manager should be defined
-	// +kubebuilder:validation:Required
-	Member []MemberParameters `json:"member" tf:"member,omitempty"`
+	// At least one manager or nested_under_groupuuid should be defined
+	// +kubebuilder:validation:Optional
+	Member []MemberParameters `json:"member,omitempty" tf:"member,omitempty"`
 
 	// The UUID of the group to set as authorizing group for membership
 	// +kubebuilder:validation:Optional
@@ -89,6 +89,10 @@ type KeyHubGroupParameters struct {
 	// The Name field of the group
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
+
+	// The UUID of the group to nest the new group under
+	// +kubebuilder:validation:Optional
+	NestedUnderGroupuuid *string `json:"nestedUnderGroupuuid,omitempty" tf:"nested_under_groupuuid,omitempty"`
 
 	// Set group to invite only
 	// +kubebuilder:validation:Optional

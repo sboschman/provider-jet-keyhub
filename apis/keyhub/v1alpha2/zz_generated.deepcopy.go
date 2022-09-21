@@ -680,6 +680,11 @@ func (in *KeyHubGroupParameters) DeepCopyInto(out *KeyHubGroupParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.NestedUnderGroupuuid != nil {
+		in, out := &in.NestedUnderGroupuuid, &out.NestedUnderGroupuuid
+		*out = new(string)
+		**out = **in
+	}
 	if in.PrivateGroup != nil {
 		in, out := &in.PrivateGroup, &out.PrivateGroup
 		*out = new(bool)

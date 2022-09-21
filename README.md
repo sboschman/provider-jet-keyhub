@@ -26,7 +26,7 @@ You can see the API reference [here](https://doc.crds.dev/github.com/crossplane-
 
 Run code-generation pipeline:
 ```console
-go run cmd/generator/main.go "$PWD"
+make generate
 ```
 
 Run against a Kubernetes cluster:
