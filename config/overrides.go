@@ -82,28 +82,7 @@ func KnownReferencers() tjconfig.ResourceOption { //nolint:gocyclo
 				continue
 			}
 			switch k {
-			// case "cluster_id":
-			// 	r.References["cluster_id"] = tjconfig.Reference{
-			// 		Type: "github.com/crossplane-contrib/provider-jet-rancher/apis/cluster/v1alpha2.Cluster",
-			// 	}
-			// case "project_id":
-			// 	r.References["project_id"] = tjconfig.Reference{
-			// 		Type: "github.com/crossplane-contrib/provider-jet-rancher/apis/project/v1alpha1.Project",
-			// 	}
 			}
 		}
 	}
-}
-
-func matches(name string, regexList []string) bool {
-	for _, r := range regexList {
-		ok, err := regexp.MatchString(r, name)
-		if err != nil {
-			panic(errors.Wrap(err, "cannot match regular expression"))
-		}
-		if ok {
-			return true
-		}
-	}
-	return false
 }
