@@ -14,12 +14,10 @@ limitations under the License.
 package config
 
 import (
-	"regexp"
 	"strings"
 
 	tjconfig "github.com/crossplane/terrajet/pkg/config"
 	"github.com/crossplane/terrajet/pkg/types/name"
-	"github.com/pkg/errors"
 )
 
 // GroupKindCalculator returns the correct group and kind name for given TF
