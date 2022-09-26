@@ -52,9 +52,8 @@ GO111MODULE = on
 # Setup Images
 
 REGISTRY_ORGS ?= ghcr.io/topicuskeyhub
-DOCKER_REGISTRY ?= topicuskeyhub
 IMAGES = provider-jet-keyhub provider-jet-keyhub-controller
--include build/makelib/image.mk
+-include build/makelib/imagelight.mk
 
 # ====================================================================================
 # Fallthrough

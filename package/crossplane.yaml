@@ -4,4 +4,4 @@ metadata:
   name: provider-jet-keyhub
 spec:
   controller:
-    image: DOCKER_REGISTRY/provider-jet-keyhub-controller:VERSION
+    image: provider-jet-keyhub-controller:VERSION
