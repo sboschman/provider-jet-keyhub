@@ -53,6 +53,10 @@ Build binary:
 make build
 ```
 
+## Release process
+
+Follow the Crossplane [instructions](https://crossplane.io/docs/v1.9/contributing/release-process.html).
+
 ## Report a Bug
 
 For filing bugs, suggesting improvements, or requesting new features, please
