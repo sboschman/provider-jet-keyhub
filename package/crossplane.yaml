@@ -4,4 +4,4 @@ metadata:
   name: provider-jet-keyhub
 spec:
   controller:
-    image: provider-jet-keyhub-controller:VERSION
+    image: ghcr.io/topicuskeyhub/provider-jet-keyhub-controller:VERSION
